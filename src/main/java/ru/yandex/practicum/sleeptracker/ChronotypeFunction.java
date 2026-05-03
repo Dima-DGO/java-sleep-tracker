@@ -78,14 +78,11 @@ public class ChronotypeFunction implements SleepAnalysisFunction {
     }
 
     private String convertToDisplayName(Chronotype type) {
-        switch (type) {
-            case OWL:
-                return "сова";
-            case LARK:
-                return "жаворонок";
-            default:
-                return "голубь";
-        }
+        return switch (type) {
+            case OWL -> "сова";
+            case LARK -> "жаворонок";
+            case DOVE -> "голубь";
+        };
     }
 }
 

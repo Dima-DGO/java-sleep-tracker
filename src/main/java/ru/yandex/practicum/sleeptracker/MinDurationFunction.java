@@ -6,11 +6,12 @@ import java.util.OptionalLong;
 public class MinDurationFunction implements SleepAnalysisFunction {
     @Override
     public SleepAnalysisResult apply(List<SleepingSession> sessions) {
-        OptionalLong min = sessions.stream()
+        long minDuration = sessions.stream()
                 .mapToLong(SleepingSession::getDurationInMinutes)
-                .min();
+                .min()
+                .orElse(0);
 
-        long duration = min.orElse(0);
-        return new SleepAnalysisResult("Минимальная продолжительность сессии (мин)", duration);
+
+        return new SleepAnalysisResult("Минимальная продолжительность сессии (мин)", minDuration);
     }
 }

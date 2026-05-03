@@ -6,11 +6,11 @@ import java.util.OptionalLong;
 public class MaxDurationFunction implements SleepAnalysisFunction {
     @Override
     public SleepAnalysisResult apply(List<SleepingSession> sessions) {
-        OptionalLong max = sessions.stream()
+        long maxDuration = sessions.stream()
                 .mapToLong(SleepingSession::getDurationInMinutes)
-                .max();
+                .max()
+                .orElse(0);
 
-        long duration = max.orElse(0);
-        return new SleepAnalysisResult("Максимальная продолжительность сессии (мин)", duration);
+        return new SleepAnalysisResult("Максимальная продолжительность сессии (мин)", maxDuration);
     }
 }

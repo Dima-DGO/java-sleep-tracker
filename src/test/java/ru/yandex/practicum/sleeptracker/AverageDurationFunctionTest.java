@@ -22,13 +22,15 @@ class AverageDurationFunctionTest {
                 new SleepingSession(LocalDateTime.of(2025, 10, 3, 14, 30),
                         LocalDateTime.of(2025, 10, 3, 15, 20), SleepQuality.NORMAL));
         SleepAnalysisResult result = function.apply(sessions);
-        assertEquals("Средняя продолжительность сессии (мин): 391.6666666666667", result.toString());
+        assertEquals("Средняя продолжительность сессии (мин)", result.getDescription());
+        assertEquals(391.67, (double) result.getValue(), 0.01);
     }
 
     @Test
     void testEmptySessions() {
         SleepAnalysisResult result = function.apply(List.of());
-        assertEquals("Средняя продолжительность сессии (мин): 0.0", result.toString());
+        assertEquals("Средняя продолжительность сессии (мин)", result.getDescription());
+        assertEquals(0.0, (double) result.getValue(), 0.001); // Допуск для точности
     }
 }
 
